@@ -2,3 +2,4 @@
 /.idea/
 /environment/staging/secrets/AccountMnemonic
 /environment/staging/secrets/NetworkMnemonic
+/.env
