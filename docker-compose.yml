@@ -1,6 +1,8 @@
+---
 services:
   node:
     image: ihkmuenchen/openethereum:main
+    platform: linux/amd64
     container_name: leopold_node
     restart: unless-stopped
     entrypoint: "/bin/sh /home/openethereum/start.sh"
@@ -46,4 +48,3 @@ services:
       APPLICATION_SCHEDULER_INITIALDELAYALIAS: "3000"
       APPLICATION_SCHEDULER_FIXEDDELAYALIAS: "3000"
       APPLICATION_QUOTA_BYTES: 2147483648  # 2048 * 1024 * 1024
-
