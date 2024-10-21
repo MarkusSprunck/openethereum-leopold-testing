@@ -1,19 +1,16 @@
 ---
 services:
   node:
-    image: ihkmuenchen/openethereum:main
+    image: ihkmuenchen/openethereum:scratch
     platform: linux/amd64
     container_name: leopold_node
     restart: unless-stopped
-    entrypoint: "/bin/sh /home/openethereum/start.sh"
-    user: root
+    command: "--config /home/parity/authority.toml"
     volumes:
       - "${PWD}/dist/staging/authority.toml:/home/parity/authority.toml:ro"
       - "${PWD}/dist/staging/reserved_peers:/home/parity/chain/reserved_peers:ro"
       - "${PWD}/dist/staging/spec.json:/home/parity/chain/spec.json:ro"
       - "${PWD}/dist/staging/password:/home/parity/password:ro"
-      - "${PWD}/dist/staging/scripts/format2json.sh:/home/openethereum/format2json.sh:ro"
-      - "${PWD}/dist/staging/scripts/start.sh:/home/openethereum/start.sh:ro"
       - "${PWD}/dist/staging/leopold:/home/parity/data/keys/leopold"
       - "${PWD}/dist/staging/key.priv:/home/parity/data/network/key/"
       - "${PWD}/dist/staging/data:/home/parity/data"
