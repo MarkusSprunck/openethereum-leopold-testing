@@ -1,7 +1,7 @@
 ---
 services:
   node:
-    image: ihkmuenchen/openethereum:scratch
+    image: ihkmuenchen/openethereum:alpine
     platform: linux/amd64
     container_name: leopold_node
     restart: unless-stopped
