@@ -1,11 +1,12 @@
 ---
 services:
   node:
-    image: ihkmuenchen/openethereum:alpine
+    image: ihkmuenchen/openethereum:latest
     platform: linux/amd64
     container_name: leopold_node
     restart: unless-stopped
-    command: "--config /home/parity/authority.toml"
+    command: [ "--config", "/home/parity/authority.toml" ]
+    user: root
     volumes:
       - "${PWD}/dist/staging/authority.toml:/home/parity/authority.toml:ro"
       - "${PWD}/dist/staging/reserved_peers:/home/parity/chain/reserved_peers:ro"
@@ -29,7 +30,8 @@ services:
         mode: host
 
   leopold-metrics-guest:
-    image: ihkmuenchen/cbc-metrics:latest
+    image: ihkmuenchen/c4t-metrics:6.9.0
+    platform: linux/amd64
     container_name: leopold_metrics
     restart: unless-stopped
     ports:

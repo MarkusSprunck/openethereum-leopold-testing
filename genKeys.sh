@@ -83,8 +83,6 @@ openssl rand -hex 40 > "$MACHINE_DIR/$PASSWORD"
 
 cp -f $BASE_DIR"/environment/$STAGE/template/reserved_peers" $MACHINE_DIR"/reserved_peers"
 cp -f $BASE_DIR"/environment/$STAGE/template/spec.json" $MACHINE_DIR"/spec.json"
-cp -f $BASE_DIR"/environment/$STAGE/files/start.sh" $MACHINE_DIR"/scripts/start.sh"
-cp -f $BASE_DIR"/environment/$STAGE/files/format2json.sh" $MACHINE_DIR"/scripts/format2json.sh"
 
 #replace mining address in cofig toml
 cp -f $CONFIG_FILE_TEMPLATE $MACHINE_DIR
