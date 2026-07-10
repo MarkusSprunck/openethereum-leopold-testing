@@ -4,8 +4,8 @@ echo "##########################################################################
 echo "# 1. Remove running container and pull latest image"
 echo "###################################################################################"
 
-docker pull --platform linux/x86_64 ihkmuenchen/openethereum:v3.5.0
-docker pull --platform linux/x86_64 ihkmuenchen/c4t-metrics:6.9.0
+docker pull --platform linux/x86_64 ihkmunich/openethereum:latest-rust-1.97
+docker pull --platform linux/x86_64 ihkmunich/c4t-metrics:7.0.1
 
 docker-compose down
 

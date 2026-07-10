@@ -1,7 +1,7 @@
 ---
 services:
   node:
-    image: ihkmuenchen/openethereum:v3.5.0
+    image: ihkmunich/openethereum:latest-rust-1.97
     platform: linux/amd64
     container_name: leopold_node
     restart: unless-stopped
@@ -30,7 +30,7 @@ services:
         mode: host
 
   leopold-metrics-guest:
-    image: ihkmuenchen/c4t-metrics:6.9.0
+    image: ihkmunich/c4t-metrics:7.0.1
     platform: linux/amd64
     container_name: leopold_metrics
     restart: unless-stopped
