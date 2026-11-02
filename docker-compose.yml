@@ -1,7 +1,7 @@
 ---
 services:
   node:
-    image: ihkmunich/openethereum:latest-rust-1.97
+    image: ihkmunich/openethereum:v3.5.1
     platform: linux/amd64
     container_name: leopold_node
     restart: unless-stopped
