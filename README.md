@@ -59,10 +59,9 @@ Host 3. All other software components are used for monitoring the Leopold blockc
 ![](images/leopold-topologie-stag-6.2.1.png)
 
 
-## 3. Slim-Api
+## 3. Contracts Api Slim
 
-
-Check the status of a document:
+Check the current status of a document:
 ```shell
 curl -X 'GET' 'http://localhost:9141/api/cbc/v1/LEOPOLD/contracts/0xd83F2780f7277f902d08AE2b5D45784476B4112d/documents/0xe887b2f083866a96f0cd14cc5d54f1cee090fa68ddcf307c39a192459e056cf4/status'
 ```
@@ -94,7 +93,3 @@ curl -X 'DELETE' \
   'http://localhost:9141/api/cbc/v1/LEOPOLD/contracts/0xd83F2780f7277f902d08AE2b5D45784476B4112d/documents/0xe887b2f083866a96f0cd14cc5d54f1cee090fa68ddcf307c39a192459e056cf4' \
   -H 'Authorization: Basic aXNzdWVyOmlzc3VlcjEyMw=='
 ```
-
-
-
-https://manager-stg.cert4trust.de/contracts/0xd83F2780f7277f902d08AE2b5D45784476B4112d
