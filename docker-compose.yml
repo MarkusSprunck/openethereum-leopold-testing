@@ -8,13 +8,13 @@ services:
     command: [ "--config", "/home/parity/authority.toml" ]
     user: root
     volumes:
-      - "${PWD}/dist/staging/authority.toml:/home/parity/authority.toml:ro"
-      - "${PWD}/dist/staging/reserved_peers:/home/parity/chain/reserved_peers:ro"
-      - "${PWD}/dist/staging/spec.json:/home/parity/chain/spec.json:ro"
-      - "${PWD}/dist/staging/password:/home/parity/password:ro"
-      - "${PWD}/dist/staging/leopold:/home/parity/data/keys/leopold"
-      - "${PWD}/dist/staging/key.priv:/home/parity/data/network/key/"
-      - "${PWD}/dist/staging/data:/home/parity/data"
+      - "./dist/staging/authority.toml:/home/parity/authority.toml:ro"
+      - "./dist/staging/reserved_peers:/home/parity/chain/reserved_peers:ro"
+      - "./dist/staging/spec.json:/home/parity/chain/spec.json:ro"
+      - "./dist/staging/password:/home/parity/password:ro"
+      - "./dist/staging/leopold:/home/parity/data/keys/leopold"
+      - "./dist/staging/key.priv:/home/parity/data/network/key/"
+      - "./dist/staging/data:/home/parity/data"
     ports:
       - target: 8545
         published: 8545
@@ -28,6 +28,32 @@ services:
         published: 30303
         protocol: udp
         mode: host
+
+  c4t-contracts-api-slim:
+    image: ihkmunich/c4t-contracts-api-slim:7.1.0
+    platform: linux/amd64
+    container_name: c4t-contracts-api-slim
+    restart: unless-stopped
+    init: true
+    ports:
+      - "9141:9141"
+    environment:
+    # WEB3_PROVIDER: "https://leopold-node3-rpc-stg.cert4trust.de"
+      WEB3_PROVIDER: "http://node:8545"
+      SERVER_PORT: "9141"
+      MANAGEMENT_TRACING_ENABLED: "false"
+      MANAGEMENT_TRACING_EXPORT_ENABLED: "false"
+      MANAGEMENT_TRACING_EXPORT_ZIPKIN_ENABLED: "false"
+      APPLICATION_BLOCKCHAIN_LEOPOLD_HASHVALUEMANAGER_ACCOUNTS_ROLE_ADMIN_ADDRESS: "${LEOPOLD_ACCOUNT_ADDRESS}"
+      APPLICATION_BLOCKCHAIN_LEOPOLD_HASHVALUEMANAGER_ACCOUNTS_ROLE_ADMIN_PRIVATEKEY: "${LEOPOLD_ACCOUNT_PK}"
+      APPLICATION_BLOCKCHAIN_LEOPOLD_HASHVALUEMANAGER_ACCOUNTS_ROLE_ISSUER_ADDRESS: "${LEOPOLD_ACCOUNT_ADDRESS}"
+      APPLICATION_BLOCKCHAIN_LEOPOLD_HASHVALUEMANAGER_ACCOUNTS_ROLE_ISSUER_PRIVATEKEY: "${LEOPOLD_ACCOUNT_PK}"
+      APPLICATION_BLOCKCHAIN_LEOPOLD_HASHVALUEMANAGER_ACCOUNTS_ROLE_OPERATOR_ADDRESS: "${LEOPOLD_ACCOUNT_ADDRESS}"
+      APPLICATION_BLOCKCHAIN_LEOPOLD_HASHVALUEMANAGER_ACCOUNTS_ROLE_OPERATOR_PRIVATEKEY: "${LEOPOLD_ACCOUNT_PK}"
+    healthcheck:
+      test: wget --no-check-certificate -T 3 -q -O - http://127.0.0.1:9141/actuator/health | grep -q '"status":"UP"}$' || exit 1
+    depends_on:
+      - node
 
   leopold-metrics-guest:
     image: ihkmunich/c4t-metrics:7.0.1
@@ -47,3 +73,5 @@ services:
       APPLICATION_SCHEDULER_INITIALDELAYALIAS: "3000"
       APPLICATION_SCHEDULER_FIXEDDELAYALIAS: "3000"
       APPLICATION_QUOTA_BYTES: 2147483648  # 2048 * 1024 * 1024
+    depends_on:
+      - node

@@ -6,6 +6,7 @@ echo "##########################################################################
 
 docker pull --platform linux/x86_64 ihkmunich/openethereum:v3.5.1
 docker pull --platform linux/x86_64 ihkmunich/c4t-metrics:7.0.1
+docker pull --platform linux/x86_64 ihkmunich/c4t-contracts-api-slim:7.1.0
 
 docker-compose down
 
@@ -19,5 +20,4 @@ echo "##########################################################################
 echo "# 3. Start Docker"
 echo "###################################################################################"
 
-echo 'PWD='$(pwd)'' > .env
 docker-compose up -d

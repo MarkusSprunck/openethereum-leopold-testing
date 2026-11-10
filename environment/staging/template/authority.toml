@@ -14,7 +14,7 @@ warp = false
 [rpc]
 interface = "0.0.0.0"
 cors = ["all"]
-hosts = ["none"]
+hosts = ["all"]
 apis = ["web3", "eth", "net", "rpc", "parity"]
 
 [ipc]
